@@ -9,5 +9,11 @@
     <string name="pref_location_key">location</string>
     <string name="pref_location_title">Location</string>
     <string name="pref_location_default">10128</string>
+    <string name="pref_units_metric">Metric</string>
+    <string name="pref_units_imperial">Imperial</string>
+    <string name="pref_units_metric_label">Metric</string>
+    <string name="pref_units_imperial_label">Imperial</string>
+    <string name="pref_units_label">Unit</string>
+    <string name="pref_units_key">Key</string>
 
 </resources>
