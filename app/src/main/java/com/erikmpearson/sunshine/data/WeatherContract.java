@@ -1,4 +1,4 @@
-package data;
+package com.erikmpearson.sunshine.data;
 
 /**
  * Created by erik on 10/22/14.
