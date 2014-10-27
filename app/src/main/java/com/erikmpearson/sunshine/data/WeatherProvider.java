@@ -41,8 +41,46 @@ public class WeatherProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] strings, String s, String[] strings2, String s2) {
-        return null;
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
+
+        Cursor retCursor;
+        switch (sUriMatcher.match(uri)) {
+            case WEATHER_WITH_LOCATION_AND_DATE:
+            {
+                retCursor = null;
+                break;
+            }
+            case WEATHER_WITH_LOCATION: {
+                retCursor = null;
+                break;
+            }
+            case WEATHER: {
+                retCursor = mOpenHelper.getReadableDatabase().query(
+                        WeatherContract.WeatherEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            }
+            case LOCATION_ID: {
+                retCursor = null;
+                break;
+            }
+            case LOCATION: {
+                retCursor = null;
+                break;
+            }
+
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
     }
 
     @Override
