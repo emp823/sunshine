@@ -37,14 +37,22 @@ public class TestProvider extends AndroidTestCase {
         assertTrue(locationRowId != -1);
         Log.d(LOG_TAG, "New row id: " + locationRowId);
 
-        Cursor cursor = db.query(
-                LocationEntry.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
+        Cursor cursor = mContext.getContentResolver().query(
+                LocationEntry.CONTENT_URI,
+                null, // return all
+                null, // cols for where
+                null, // values for where
+                null // sort order
+        );
+
+        TestDb.validateCursor(cursor, testValues);
+
+        cursor = mContext.getContentResolver().query(
+                LocationEntry.buildLocationUri(locationRowId),
+                null, // return all
+                null, // cols for where
+                null, // values for where
+                null  // sort order
         );
 
         TestDb.validateCursor(cursor, testValues);
