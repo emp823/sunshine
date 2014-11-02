@@ -15,7 +15,7 @@ import android.net.Uri;
 
 public class WeatherContract {
 
-    public static final String CONTENT_AUTHORITY = "com.example.android.sunshine.app";
+    public static final String CONTENT_AUTHORITY = "com.erikmpearson.sunshine";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
