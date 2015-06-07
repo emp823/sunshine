@@ -15,7 +15,6 @@ public class SettingsActivity extends PreferenceActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Add 'general' preferences, defined in the XML file
         addPreferencesFromResource(R.xml.pref_general);
 
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
@@ -23,11 +22,8 @@ public class SettingsActivity extends PreferenceActivity
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
-        // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(this);
 
-        // Trigger the listener immediately with the preference's
-        // current value.
         onPreferenceChange(preference,
                 PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
@@ -45,7 +41,6 @@ public class SettingsActivity extends PreferenceActivity
                 preference.setSummary(listPreference.getEntries()[prefIndex]);
             }
         } else {
-            // For other preferences, set the summary to the value's simple string representation.
             preference.setSummary(stringValue);
         }
         return true;

@@ -64,7 +64,6 @@ public class TestProvider extends AndroidTestCase {
         Uri locationUri = mContext.getContentResolver().insert(LocationEntry.CONTENT_URI, testValues);
         long locationRowId = ContentUris.parseId(locationUri);
 
-        // Verify we got a row back.
         assertTrue(locationRowId != -1);
 
         Cursor cursor = mContext.getContentResolver().query(
@@ -107,7 +106,6 @@ public class TestProvider extends AndroidTestCase {
 
         addAllContentValues(weatherValues, testValues);
 
-        // Get the joined Weather and Location data
         weatherCursor = mContext.getContentResolver().query(
                 WeatherEntry.buildWeatherLocation(TestDb.TEST_LOCATION),
                 null, // leaving "columns" null just returns all the columns.
@@ -117,7 +115,6 @@ public class TestProvider extends AndroidTestCase {
         );
         TestDb.validateCursor(weatherCursor, weatherValues);
 
-        // Get the joined Weather and Location data with a start date
         weatherCursor = mContext.getContentResolver().query(
                 WeatherEntry.buildWeatherLocationWithStartDate(
                         TestDb.TEST_LOCATION, TestDb.TEST_DATE),
@@ -128,7 +125,6 @@ public class TestProvider extends AndroidTestCase {
         );
         TestDb.validateCursor(weatherCursor, weatherValues);
 
-        // Get the joined Weather data for a specific date
         weatherCursor = mContext.getContentResolver().query(
                 WeatherEntry.buildWeatherLocationWithDate(TestDb.TEST_LOCATION, TestDb.TEST_DATE),
                 null,
@@ -161,7 +157,6 @@ public class TestProvider extends AndroidTestCase {
     }
 
     public void testUpdateLocation() {
-        // Create a new map of values, where column names are the keys
         ContentValues values = TestDb.createNorthPoleLocationValues();
 
         Uri locationUri = mContext.getContentResolver().
@@ -192,7 +187,6 @@ public class TestProvider extends AndroidTestCase {
         TestDb.validateCursor(cursor, updatedValues);
     }
 
-    // Make sure we can still delete after adding/updating stuff
     public void testDeleteRecordsAtEnd() {
         deleteAllRecords();
     }
@@ -225,7 +219,6 @@ public class TestProvider extends AndroidTestCase {
     }
 
     static ContentValues createKalamazooLocationValues() {
-        // Create a new map of values, where column names are the keys
         ContentValues testValues = new ContentValues();
         testValues.put(LocationEntry.COLUMN_LOCATION_SETTING, KALAMAZOO_LOCATION_SETTING);
         testValues.put(LocationEntry.COLUMN_CITY_NAME, "Kalamazoo");
@@ -235,7 +228,6 @@ public class TestProvider extends AndroidTestCase {
         return testValues;
     }
 
-    // Inserts both the location and weather data for the Kalamazoo data set.
     public void insertKalamazooData() {
         ContentValues kalamazooLocationValues = createKalamazooLocationValues();
         Uri locationInsertUri = mContext.getContentResolver()
@@ -254,7 +246,6 @@ public class TestProvider extends AndroidTestCase {
         insertKalamazooData();
         String newDescription = "Cats and Frogs (don't warn the tadpoles!)";
 
-        // Make an update to one value.
         ContentValues kalamazooUpdate = new ContentValues();
         kalamazooUpdate.put(WeatherEntry.COLUMN_SHORT_DESC, newDescription);
 
@@ -269,7 +260,6 @@ public class TestProvider extends AndroidTestCase {
                 null
         );
 
-        // Make the same update to the full ContentValues for comparison.
         ContentValues kalamazooAltered = createKalamazooWeatherValues(locationRowId);
         kalamazooAltered.put(WeatherEntry.COLUMN_SHORT_DESC, newDescription);
 
@@ -290,7 +280,6 @@ public class TestProvider extends AndroidTestCase {
                 null
         );
 
-        // Make the same update to the full ContentValues for comparison.
         ContentValues kalamazooAltered = createKalamazooWeatherValues(locationRowId);
         kalamazooAltered.remove(WeatherEntry.COLUMN_HUMIDITY);
 

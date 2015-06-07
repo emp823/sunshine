@@ -33,8 +33,6 @@ public class TestDb extends AndroidTestCase {
 
     public void testInsertReadDb() {
 
-        // If there's an error in SQL table creation Strings,
-        // errors will be thrown here when you try to get a writable database.
         WeatherDbHelper dbHelper = new WeatherDbHelper(mContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -43,7 +41,6 @@ public class TestDb extends AndroidTestCase {
         long locationRowId;
         locationRowId = db.insert(LocationEntry.TABLE_NAME, null, testValues);
 
-        // Verify we got a row back.
         assertTrue(locationRowId != -1);
         Log.d(LOG_TAG, "New row id: " + locationRowId);
 
@@ -96,7 +93,6 @@ public class TestDb extends AndroidTestCase {
     }
 
     static ContentValues createNorthPoleLocationValues() {
-        // Create a new map of values, where column names are the keys
         ContentValues testValues = new ContentValues();
         testValues.put(LocationEntry.COLUMN_LOCATION_SETTING, TEST_LOCATION);
         testValues.put(LocationEntry.COLUMN_CITY_NAME, "North Pole");

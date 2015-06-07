@@ -45,14 +45,12 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
